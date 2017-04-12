@@ -80,7 +80,7 @@ describe('Blackjack', function(){
       let gameStart = game.startGame();
       //let dealerDealt = game.dealerDealt();
       let playerLimit = game.playerLimit();
-      //assert.equal(game.playerLimit(),true);
+      assert.equal(game.playerLimit(),true);
     })
   })
   describe('#dealerDealt()', function(){
