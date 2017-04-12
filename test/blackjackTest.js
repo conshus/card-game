@@ -31,13 +31,13 @@ describe('Blackjack', function(){
       let game = new Blackjack('James','Florida');
       let gameStart = game.startGame();
       assert.equal(game.playerCards.length,2);
-      assert.equal(game.playerCards.includes(game.deck.cards),false);
+      //assert.equal(game.playerCards.includes(game.deck.cards),false);
     });
     it('dealer gets two cards', function(){
       let game = new Blackjack('James','Florida');
       let gameStart = game.startGame();
       assert.equal(game.dealerCards.length,2);
-      assert.equal(game.dealerCards.includes(game.deck.cards),false);
+      //assert.equal(game.dealerCards.includes(game.deck.cards),false);
     });
   })
   describe('#playerDealt()', function(){
@@ -52,7 +52,8 @@ describe('Blackjack', function(){
     it('player does not want anymore cards', function(){
       let game = new Blackjack('James','Florida');
       let gameStart = game.startGame();
-      let dealerDealt = game.dealerDealt();
+      //let dealerDealt = game.dealerDealt();
+      let dealerDealt = game.dealerLimit();
       assert.equal(game.dealerCards.length>2,true);
     })
   })
@@ -60,8 +61,8 @@ describe('Blackjack', function(){
     it('dealer takes cards till value >= 17', function(){
       let game = new Blackjack('James','Florida');
       let gameStart = game.startGame();
-      let dealerDealt = game.dealerDealt();
-      //let dealerLimit = game.dealerLimit();
+      //let dealerDealt = game.dealerDealt();
+      let dealerLimit = game.dealerLimit();
       assert.equal(game.dealerLimit()>=17,true);
     })
   })
