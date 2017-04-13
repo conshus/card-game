@@ -15,8 +15,10 @@
    √if dealer's upcard is 2,3 - hit until total >= 13
    √if player's initial hand is an Ace and 10 value card = BLACKJACK!
    √if player's initial hand is a soft hand, player's limit is >=18
- - nice to have - splitting pairs
- - nice to have - doubling down
+ x determine if card value results in bust, blackjack or returns value
+ x determine winner
+ x nice to have - doubling down
+ x nice to have - splitting pairs
 */
 
 const assert = require('assert');
@@ -84,6 +86,46 @@ describe('Blackjack', function(){
       //let dealerDealt = game.dealerDealt();
       let dealerLimit = game.dealerLimit();
       assert.equal(game.dealerLimit()>=17,true);
+    })
+  })
+  describe('#handResult()', function(){
+    it('busts if total cards value > 21', function(){
+      assert.equal(game.handResult(25),'bust');
+    })
+    it('hits blackjack if total cards value = 21', function(){
+      assert.equal(game.handResult(21),'blackjack');
+    })
+    it('returns value if total cards value < 21', function(){
+      assert.equal(game.handResult(18)==18,true);
+    })
+  })
+  describe('#doubleDownResult()', function(){
+    it('player decides to double down when first 2 cards total 9, 10 or 11', function(){
+      let doubleDown=[9, 10, 11];
+      let gameStart = game.startGame();
+      for (i=0; i<doubleDown.length; i++){
+        game.playerFirstTwoCardsTotal = doubleDown[i];
+        assert.equal(game.doubleDownResult(), 'double down');
+      }
+    })
+  })
+  describe('#splittingPairs()', function(){
+    it('player has the option to split pairs', function(){
+      assert.equal(game.splittingPairs(12,12),"Cards can be split");
+    })
+  })
+  describe('#gameOver()', function(){
+    it('Dealer wins', function(){
+      assert.equal(game.gameOver(26,12),"Dealer wins");
+      assert.equal(game.gameOver(17,20),"Dealer wins");
+    })
+    it('Player wins', function(){
+      assert.equal(game.gameOver(12,26),"Player wins");
+      assert.equal(game.gameOver(20,17),"Player wins");
+    })
+    it('There is a draw', function(){
+      assert.equal(game.gameOver(15,15),"Draw");
+      assert.equal(game.gameOver(23,23),"Draw");
     })
   })
 })
