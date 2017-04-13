@@ -42,49 +42,49 @@ describe('Blackjack', function(){
   });
   describe('#start()', function(){
     it('cards have been shuffled 7 times', function(){
-      let gameStart = game.startGame();
+      game.startGame();
       assert.equal(game.timesShuffled, 7);
     });
     it('player has cut the cards', function(){
-      let gameStart = game.startGame();
+      game.startGame();
       assert.equal(game.startGame(),false);
     })
     it('player gets two cards', function(){
-      let gameStart = game.startGame();
+      game.startGame();
       assert.equal(game.playerCards.length,2);
     });
     it('dealer gets two cards', function(){
-      let gameStart = game.startGame();
+      game.startGame();
       assert.equal(game.dealerCards.length,2);
     });
   })
   describe('#playerDealt()', function(){
     it('player asked for another card (hit)', function(){
-      let gameStart = game.startGame();
-      let playerDealt = game.playerDealt();
+      game.startGame();
+      game.playerDealt();
       assert.equal(game.playerCards.length>2,true);
     })
   })
   describe('#playerLimit()', function(){
     it('player hits until limit based on strategy', function(){
-      let gameStart = game.startGame();
-      let playerLimit = game.playerLimit();
+      game.startGame();
+      game.playerLimit();
       assert.equal(game.playerLimit(),true);
     })
   })
   describe('#dealerDealt()', function(){
     it('player does not want anymore cards (stand)', function(){
-      let gameStart = game.startGame();
-      let dealerDealt = game.dealerDealt();
+      game.startGame();
+      game.dealerDealt();
       //let dealerDealt = game.dealerLimit();
       assert.equal(game.dealerCards.length>2,true);
     })
   })
   describe('#dealerLimit()', function(){
     it('dealer takes cards till value >= 17', function(){
-      let gameStart = game.startGame();
+      game.startGame();
       //let dealerDealt = game.dealerDealt();
-      let dealerLimit = game.dealerLimit();
+      game.dealerLimit();
       assert.equal(game.dealerLimit()>=17,true);
     })
   })
@@ -102,7 +102,7 @@ describe('Blackjack', function(){
   describe('#doubleDownResult()', function(){
     it('player decides to double down when first 2 cards total 9, 10 or 11', function(){
       let doubleDown=[9, 10, 11];
-      let gameStart = game.startGame();
+      game.startGame();
       for (i=0; i<doubleDown.length; i++){
         game.playerFirstTwoCardsTotal = doubleDown[i];
         assert.equal(game.doubleDownResult(), 'double down');
